@@ -1,0 +1,616 @@
+<style>
+  .box {
+    box-sizing: border-box;
+    width: 60px !important;
+    height: 25px !important;
+    margin: 0 !important;
+    padding: 0 10px !important;
+  }
+</style>
+
+<body>
+
+  <!-------- フォーム -------->
+  <form name="myForm">
+    <!-------- セレクトボックス -------->
+    データ提供　梨朗様<br>
+    使用方法
+    <br>
+    初期ステータス/現在ステータス<br>
+    OFE
+    <input type="number" class="box" name="nofe"><br>
+    DEF
+    <input type="number" class="box" name="ndef"><br>
+    POW
+    <input type="number" class="box" name="npow"><br>
+    SPD
+    <input type="number" class="box" name="nspd"><br>
+    TEC
+    <input type="number" class="box" name="ntec">
+    <br><br>
+    シュート
+    <select name="shoot">
+      <option value="SSS">SSS</option>
+      <option value="SS">SS</option>
+      <option value="S">S</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+    </select>
+    ドリブル
+    <select name="dribble">
+      <option value="SSS">SSS</option>
+      <option value="SS">SS</option>
+      <option value="S">S</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+    </select>
+    パス
+    <select name="pass">
+      <option value="SSS">SSS</option>
+      <option value="SS">SS</option>
+      <option value="S">S</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+    </select>
+    ブロック
+    <select name="block">
+      <option value="SSS">SSS</option>
+      <option value="SS">SS</option>
+      <option value="S">S</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+    </select>
+    パスカット
+    <select name="cut">
+      <option value="SSS">SSS</option>
+      <option value="SS">SS</option>
+      <option value="S">S</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+    </select>
+    タックル
+    <select name="tackle">
+      <option value="SSS">SSS</option>
+      <option value="SS">SS</option>
+      <option value="S">S</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+    </select>
+    <br><br>
+
+    試合難易度<br>
+    <select name="dificality">
+      <option value="1">星1</option>
+      <option value="1.1">星2</option>
+      <option value="1.3">星3</option>
+    </select>
+    <br><br>
+    飽くなき攻撃<br>
+    <input type="checkbox" name="skill" value="1.2">飽くなき攻撃
+    <br><br>
+    育成イベント<br>
+    <input type="checkbox" name="event" value="1.2">育成イベント
+    <br><br>
+
+    アイテム1<br>
+    <select name="item1">
+      <option value="1.1">熱闘のはちまき</option>
+      <option value="1.15">熱闘のはちまき＋</option>
+      <option value="1.2">熱闘のはちまき＋＋</option>
+      <option value="1.25">精密なスコアブック</option>
+      <option value="1.2">ポジション精密</option>
+    </select>
+    <br>
+    アイテム2<br>
+    <select name="item2">
+      <option value="1.1">熱闘のはちまき</option>
+      <option value="1.15">熱闘のはちまき＋</option>
+      <option value="1.2">熱闘のはちまき＋＋</option>
+      <option value="1.25">精密なスコアブック</option>
+      <option value="1.2">ポジション精密</option>
+    </select>
+    <br>
+    アイテム3<br>
+    <select name="item3">
+      <option value="1.1">熱闘のはちまき</option>
+      <option value="1.15">熱闘のはちまき＋</option>
+      <option value="1.2">熱闘のはちまき＋＋</option>
+      <option value="1.25">精密なスコアブック</option>
+      <option value="1.2">ポジション精密</option>
+    </select>
+    <br><br>
+
+    <!-------- 計算ボタン -------->
+    <input type="button" name="myButton" value="計算"
+    onclick="tortalpoint(nofe.value, ndef.value, npow.value, nspd.value, ntec.value)">
+  </form>
+
+  EからSまでに必要なポイントは400<br>
+  CからSまでに必要なポイントは240
+  <br><br>
+
+  <!-------- 表示欄 -------->
+  <!--テスト用
+  test ofep = <span id="testofep">***</span><br>
+  test defp = <span id="testdefp">***</span><br>
+  test powp = <span id="testpowp">***</span><br>
+  test spdp = <span id="testspdp">***</span><br>
+  test tecp = <span id="testtecp">***</span><br><br>
+-->
+<!--テスト用
+  test ofei = <span id="testofei">***</span><br>
+  test defi = <span id="testdefi">***</span><br>
+  test powi = <span id="testpowi">***</span><br>
+  test spdi = <span id="testspdi">***</span><br>
+  test teci = <span id="testteci">***</span><br>
+-->
+
+  <!-------- JavaScript -------->
+  <script type="text/javascript"><!--
+
+    function tortalpoint(nofe, ndef, npow, nspd, ntec){
+      var ofep = 0;
+      var defp = 0;
+      var powp = 0;
+      var spdp = 0;
+      var tecp = 0;
+
+      //入力された値から各ステータスを総ポイント数に変換
+      while(nofe != 0){
+        if(nofe > 95){
+          ofep += 240
+          nofe--
+        }
+        else if(nofe > 90){
+          ofep += 160
+          nofe--
+        }
+        else if(nofe > 85){
+          ofep += 120
+          nofe--
+        }
+        else if(nofe > 80){
+          ofep += 90
+          nofe--
+        }
+        else if(nofe > 75){
+          ofep += 70
+          nofe--
+        }
+        else if(nofe > 70){
+          ofep += 60
+          nofe--
+        }
+        else{
+          ofep += 50
+          nofe--
+        }
+      }
+
+      while(ndef != 0){
+        if(ndef > 95){
+          defp += 240
+          ndef--
+        }
+        else if(ndef > 90){
+          defp += 160
+          ndef--
+        }
+        else if(ndef > 85){
+          defp += 120
+          ndef--
+        }
+        else if(ndef > 80){
+          defp += 90
+          ndef--
+        }
+        else if(ndef > 75){
+          defp += 70
+          ndef--
+        }
+        else if(ndef > 70){
+          defp += 60
+          ndef--
+        }
+        else{
+          defp += 50
+          ndef--
+        }
+      }
+      while(npow != 0){
+        if(npow > 95){
+          powp += 240
+          npow--
+        }
+        else if(npow > 90){
+          powp += 160
+          npow--
+        }
+        else if(npow > 85){
+          powp += 120
+          npow--
+        }
+        else if(npow > 80){
+          powp += 90
+          npow--
+        }
+        else if(npow > 75){
+          powp += 70
+          npow--
+        }
+        else if(npow > 70){
+          powp += 60
+          npow--
+        }
+        else{
+          powp += 50
+          npow--
+        }
+      }
+      while(nspd != 0){
+        if(nspd > 95){
+          spdp += 240
+          nspd--
+        }
+        else if(nspd > 90){
+          spdp += 160
+          nspd--
+        }
+        else if(nspd > 85){
+          spdp += 120
+          nspd--
+        }
+        else if(nspd > 80){
+          spdp += 90
+          nspd--
+        }
+        else if(nspd > 75){
+          spdp += 70
+          nspd--
+        }
+        else if(nspd > 70){
+          spdp += 60
+          nspd--
+        }
+        else{
+          spdp += 50
+          nspd--
+        }
+      }
+      while(ntec != 0){
+        if(ntec > 95){
+          tecp += 240
+          ntec--
+        }
+        else if(ntec > 90){
+          tecp += 160
+          ntec--
+        }
+        else if(ntec > 85){
+          tecp += 120
+          ntec--
+        }
+        else if(ntec > 80){
+          tecp += 90
+          ntec--
+        }
+        else if(ntec > 75){
+          tecp += 70
+          ntec--
+        }
+        else if(ntec > 70){
+          tecp += 60
+          ntec--
+        }
+        else{
+          tecp += 50
+          ntec--
+        }
+      }
+/*テスト用
+      document.getElementById("testofep").innerHTML = ofep;
+      document.getElementById("testdefp").innerHTML = defp;
+      document.getElementById("testpowp").innerHTML = powp;
+      document.getElementById("testspdp").innerHTML = spdp;
+      document.getElementById("testtecp").innerHTML = tecp;
+*/
+//各ステータス上昇値の基礎
+      var initofe = 19;
+      var initdef = 19;
+      var initpow = 16;
+      var initspd = 19;
+      var inittec = 19;
+      //セレクトボックスの情報を取得
+      const shoot = document.myForm.shoot;
+    	const sop = shoot.selectedIndex;
+      const dribble = document.myForm.dribble;
+      const drp = dribble.selectedIndex;
+      const pass = document.myForm.pass;
+      const pap = pass.selectedIndex;
+      const block = document.myForm.block;
+      const blp = block.selectedIndex;
+      const cut = document.myForm.cut;
+      const cup = cut.selectedIndex;
+      const tackle = document.myForm.tackle;
+      const tap = tackle.selectedIndex;
+      //結果を踏まえた上昇量
+      var ofei = initofe;
+      var defi = initdef;
+      var powi = initpow;
+      var spdi = initspd;
+      var teci = inittec;
+
+          if( sop == 0 ){
+            ofei += 33;
+            powi += 25;
+            teci += 9;
+          }
+          else if( sop == 1 ){
+            ofei += 28;
+            powi += 22;
+            teci += 8;
+          }
+          else if( sop == 2 ){
+            ofei += 21;
+            powi += 16;
+            teci += 6;
+          }
+          else if( sop == 3 ){
+            ofei += 14;
+            powi += 11;
+            teci += 4;
+          }
+          else if( sop == 4 ){
+            ofei += 9;
+            powi += 7;
+            teci += 3;
+          }
+          else if( sop == 5 ){
+            ofei += 4;
+            powi += 4;
+            teci += 2;
+          }
+          else if( sop == 6 ){
+            ofei += 0;
+            powi += 0;
+          }
+
+          if( drp == 0 ){
+            ofei += 9;
+            powi += 9;
+            spdi += 33;
+            teci += 17;
+          }
+          else if( drp == 1 ){
+            ofei += 8;
+            powi += 8;
+            spdi += 28;
+            teci += 14;
+          }
+          else if( drp == 2 ){
+            ofei += 6;
+            powi += 6;
+            spdi += 21;
+            teci += 11;
+          }
+          else if( drp == 3 ){
+            ofei += 4;
+            powi += 4;
+            spdi += 14;
+            teci += 7;
+          }
+          else if( drp == 4 ){
+            ofei += 3;
+            powi += 3;
+            spdi += 9;
+            teci += 5;
+          }
+          else if( drp == 5 ){
+            ofei += 2;
+            powi += 2;
+            spdi += 4;
+            teci += 2;
+          }
+          else if( drp == 6 ){
+            ofei += 0;
+          }
+
+          if( pap == 0 ){
+            ofei += 17;
+            spdi += 9;
+            teci += 33;
+          }
+          else if( pap == 1 ){
+            ofei += 14;
+            spdi += 8;
+            teci += 28;
+          }
+          else if( pap == 2 ){
+            ofei += 11;
+            spdi += 6;
+            teci += 21;
+          }
+          else if( pap == 3 ){
+            ofei += 7;
+            spdi += 4;
+            teci += 14;
+          }
+          else if( pap == 4 ){
+            ofei += 5;
+            spdi += 3;
+            teci += 9;
+          }
+          else if( pap == 5 ){
+            ofei += 2;
+            spdi += 2;
+            teci += 4;
+          }
+          else if( pap == 6 ){
+            ofei += 0;
+            powi += 0;
+          }
+
+          if( blp == 0 ){
+            defi += 25;
+            powi += 17;
+          }
+          else if( blp == 1 ){
+            defi += 22;
+            powi += 14;
+          }
+          else if( blp == 2 ){
+            defi += 16;
+            powi += 11;
+          }
+          else if( blp == 3 ){
+            defi += 11;
+            powi += 7;
+          }
+          else if( blp == 4 ){
+            defi += 7;
+            powi += 5;
+          }
+          else if( blp == 5 ){
+            defi += 4;
+            powi += 2;
+          }
+          else if( blp == 6 ){
+            ofei += 0;
+            powi += 0;
+          }
+
+          if( cup == 0 ){
+            defi += 17;
+            spdi += 9;
+          }
+          else if( cup == 1 ){
+            defi += 14;
+            spdi += 8;
+          }
+          else if( cup == 2 ){
+            defi += 11;
+            spdi += 6;
+          }
+          else if( cup == 3 ){
+            defi += 7;
+            spdi += 4;
+          }
+          else if( cup == 4 ){
+            defi += 5;
+            spdi += 3;
+          }
+          else if( cup == 5 ){
+            defi += 2;
+            spdi += 2;
+          }
+          else if( cup == 6 ){
+            ofei += 0;
+          }
+
+          if( tap == 0 ){
+            ofei += 9;
+            defi += 25;
+            powi += 9;
+            spdi += 17;
+            teci += 9;
+          }
+          else if( tap == 1 ){
+            ofei += 8;
+            defi += 22;
+            powi += 8;
+            spdi += 14;
+            teci += 8;
+          }
+          else if( tap == 2 ){
+            ofei += 6;
+            defi += 16;
+            powi += 6;
+            spdi += 11;
+            teci += 6;
+          }
+          else if( tap == 3 ){
+            ofei += 4;
+            defi += 11;
+            powi += 4;
+            spdi += 7;
+            teci += 4;
+          }
+          else if( tap == 4 ){
+            ofei += 3;
+            defi += 7;
+            powi += 3;
+            spdi += 5;
+            teci += 3;
+          }
+          else if( tap == 5 ){
+            ofei += 2;
+            defi += 4;
+            powi += 2;
+            spdi += 2;
+            teci += 2;
+          }
+          else if( tap == 6 ){
+            ofei += 0;
+            powi += 0;
+          }
+/*テスト用
+      document.getElementById("testofei").innerHTML = ofei;
+      document.getElementById("testdefi").innerHTML = defi;
+      document.getElementById("testpowi").innerHTML = powi;
+      document.getElementById("testspdi").innerHTML = spdi;
+      document.getElementById("testteci").innerHTML = teci;
+*/
+      return;
+    }
+
+    /*==== 関数：結果を計算して表示 ====*/
+    function setResult(){
+
+      /*---- セレクトボックスの値を取得 ----*/
+      var mySelect = document.myForm.mySelect;
+      var options = mySelect.options;
+      var joutai;
+      for( var i=0 ; i<options.length ; i++ ){
+        if( options[i].selected ){
+          joutai = parseFloat( options[i].value );
+          break;
+        }
+      }
+
+      /*---- チェックボックスの値を取得 ----*/
+      var myCheck = document.myForm.myCheck;
+      var skill = 1;
+      for( var i=0 ; i<myCheck.length ; i++ ){
+        if( myCheck[i].checked ){
+          skill *= parseFloat( myCheck[i].value );
+        }
+      }
+
+      /*---- ダメージを計算 ----*/
+      var score = joutai * skill;
+
+
+      /*---- 結果を表示 ----*/
+      document.getElementById("result").innerHTML
+      = Math.floor( score );
+      document.getElementById("testofep").innerHTML
+      = ofep;
+
+      return;
+    }
+
+  --></script>
+
+</body>
